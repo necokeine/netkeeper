@@ -1,0 +1,21 @@
+#!/bin/bash
+#############Attention!##############################################
+# Before using this bash file, you should compile the cpp source file
+# and name the executable file as 'zshanxun'(or whatever you like)
+# then chomd + x to zshanxun and move it to /usr/local/bin/
+####################################################################
+
+echo 'NetKeeper4Fedora-autoLogin' 
+#modified from McKelvin http://mckelv.in
+oldresult=""
+result=`(ifconfig | grep 'inet 115' )`
+if [ "$result" = "" ]
+then
+	cd /etc/NetworkManager/system-connections
+	./zshanxun 057189898989@GDPF.XY 123456 > NetKeeper #'NetKeeper' is your DSL link name. Modify it to yours.
+	# change 'zshanxun' to your executable file name if necessary
+
+	( echo $'\n\n---! :('; date +%X; echo "Waiting for dial...") | tee -a sx.log
+fi
+nmcli con up id NetKeeper
+echo "Connection built!"
