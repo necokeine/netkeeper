@@ -1,5 +1,5 @@
 # NetKeeper for Fedora
-_经过测试fedora19x86_64下可以运行_
+_经过测试fedora19x86\_64下可以运行_
 
 ## 安装
   请依次执行:
