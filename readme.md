@@ -10,21 +10,7 @@
 
 ## Linux User
 ### Ubuntu User:
-1. 下载，解压
-2. 修改netkeeper脚本中的用户名和密码
-3. sudo权限下移netkeeper,dialnetkeeper,PPPOE.conf文件到/usr/local/bin/
-4. 修改/etc/network/interfaces为如下内容：<pre><code>auto lo
-		iface lo inet loopback 
-  
-		iface dsl-provider inet ppp
-		pre-up /sbin/ifconfig eth0 up # line maintained by pppoeconf
-		provider dsl-provider
-  
-		auto eth0
-		iface eth0 inet dhcp
-		</code></pre>
-5. 改变刚刚复制的netkeeper,dialnetkeeper权限为777
-6. 运行netkeeper脚本以连接：sudo netkeeper
+Please go to Folder **Netkeeper4Ubuntu** and check that readme.md
 
-###	Fedora User
+### Fedora User
 见NetKeeper4Fedora文件夹
