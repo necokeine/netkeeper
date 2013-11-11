@@ -34,7 +34,7 @@ do
 		result=`(ifconfig|grep 'inet 115')`
 		if [ "$result" = "" ]
 		then
-			( echo $'\n\n---! :('; date +%X; echo "${i} th connection failed! Reconfig OK, waiting for dial...") | tee -a /var/log/netkeeper.log
+			( echo $'\n\n---! :('; date +%X; echo "${i} th connection failed! Reconfig OK，waiting for dial……") | tee -a /var/log/netkeeper.log
 		fi
 	else
 		break
