@@ -9,12 +9,4 @@
 第一次运行，需要输入用户名和密码。建议在cmd中切换到解压后的路径中执行dial.exe，当登陆成功后显示“you win”。
 
 ## Linux User
-<<<<<<< HEAD
 Please go to NetKeeper4Fedora or Netkeeper4Ubuntu folder and check readme
-=======
-### Ubuntu User:
-Please go to Folder **Netkeeper4Ubuntu** and check that readme.md
-
-### Fedora User
-见NetKeeper4Fedora文件夹
->>>>>>> 0d4750bb7d0c26f6f9a0ac0cb2b97f8384f8e27f
