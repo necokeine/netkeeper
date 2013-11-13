@@ -54,11 +54,11 @@ void rasdial::accept(){
     RASDIALPARAMS ras_now;
     HRASCONN handle = NULL;
     char line[256]="test_ras";
-    RasValidateEntryName(NULL,line);
+    RasValidateEntryName(NULL,(LPCWSTR)line);
     ras_now.dwSize=sizeof(ras_now);
-    strcpy(ras_now.szEntryName, line);
-    strcpy(ras_now.szUserName,sRealUsername.c_str());
-    strcpy(ras_now.szPassword, ui->le2_password->text().toStdString().c_str());
+    strcpy((char *)ras_now.szEntryName, line);
+    strcpy((char *)ras_now.szUserName,sRealUsername.c_str());
+    strcpy((char *)ras_now.szPassword, ui->le2_password->text().toStdString().c_str());
     DWORD dwRet=0;
     for (int i=0;i<10;i++){
         dwRet=RasDial(NULL,NULL,&ras_now,NULL,NULL,&handle);
