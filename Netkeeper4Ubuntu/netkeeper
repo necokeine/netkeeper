@@ -1,0 +1,56 @@
+#!/bin/bash
+#By ChrisZZ
+
+echo 'Netkeeper4Ubuntu-autoLogin'
+cd $(dirname $0)
+
+
+echo 'NetKeeper4Fedora-autoLogin' 
+touch /usr/share/netkeeper/userinfo
+username=`cat /usr/share/netkeeper/userinfo|head -1`
+password=`cat /usr/share/netkeeper/userinfo|sed -n 2p`
+
+echo $username
+echo $password
+
+if [ "$username" = "" ]
+then
+	echo 'userinfo not found!'
+	read -p 'input your username(number@some.XY):' username
+	echo $username > /usr/share/netkeeper/userinfo
+	read -p 'please input your password:' password
+	echo $password >> /usr/share/netkeeper/userinfo
+else
+	echo 'got username'
+	echo 'got password'
+fi
+
+echo 'connecting to NetKeeper...'
+
+count=0
+maxcount=10
+echo $username > Netkeeper.dat
+poff -a > /dev/null
+until test -n "`ifconfig | grep ppp`"
+do
+	if [ "$count" != 0 ]
+		then echo "$count th connection failed!"
+	fi
+	realusername=`./dialnetkeeper`
+	realusername=${realusername//\"/\\\"}
+	cp PPPOE.conf temp
+	echo "user \"$realusername\"" >> temp
+	echo "password \"$password\"" >> temp
+	mv temp /etc/ppp/peers/dsl-provider
+	pon dsl-provider > /dev/null
+	count=`expr $count + 1`
+	if [ "$count" -eq "$maxcount" ]
+	then echo 'Failed too much times.Please check your userinfo, or retry later'
+	exit 0
+	fi
+	sleep 1
+done
+echo `plog | grep local`
+echo 'connection build!'
+rm Netkeeper.dat
+exit 0

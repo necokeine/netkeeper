@@ -1,15 +1,16 @@
 //////////////////////////////////////////////////////////////////////////
-// ÐÇ¿ÕÓÃ»§ÃûÉú³ÉÊµÏÖÎÄ¼þ
-// ×÷Õß:Huanfeng
-// °æ±¾:1.1
+// ï¿½Ç¿ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Ä¼ï¿½
+// ï¿½ï¿½ï¿½ï¿½:Huanfeng
+// ï¿½æ±¾:1.1
 //////////////////////////////////////////////////////////////////////////
 
 #include "CXKUsername.h"
 #include "MD5.h"
 #include<cstring>
 
-CXKUsername::CXKUsername(CString username, INT ver, long lasttimec)
-:m_username(username),RADIUS("zjxinlisx01"),LR("\r\n")
+/**CXKUsername::CXKUsername(CString username, INT ver, long lasttimec)*/
+CXKUsername::CXKUsername(CString username, INT ver, int lasttimec)
+:m_username(username),RADIUS(CString(string("zjxinlisx01"))),LR(CString(string("\r\n")))
 {
 	m_ver = ver;
 	m_lasttimec = lasttimec;
@@ -21,51 +22,56 @@ long CXKUsername::GetLastTimeC()
 }
 CString CXKUsername::Realusername()
 {
-	time_t m_time;						//µÃµ½ÏµÍ³Ê±¼ä£¬´Ó1970.01.01.00:00:00 ¿ªÊ¼µÄÃëÊý
-	long m_time1c;						//Ê±¼ä³õ´¦Àím_time1cÎª½á¹û,¾­¹ýÊ±¼ä¼ÆËã³öµÄµÚÒ»´Î¼ÓÃÜ
-	long m_time1convert;				//¶ÔÊ±¼ä²Ù×÷ºóµÄ½á¹û£¬´ËÎª¸ñÊ½×Ö´®µÄÔ­Ê¼Êý¾Ý
+	time_t m_time;						//ï¿½Ãµï¿½ÏµÍ³Ê±ï¿½ä£¬ï¿½ï¿½1970.01.01.00:00:00 ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	/**long m_time1c;*/						//Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½m_time1cÎªï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Ò»ï¿½Î¼ï¿½ï¿½ï¿½
+	int m_time1c;
+
+	/**long m_time1convert;*/				//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ê½ï¿½Ö´ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½
+	int m_time1convert;
 	unsigned char ss[4] =
 	{
 		0,0,0,0
-	};		//Ô´Êý¾Ý1,¶Ôm_time1convert½øÐÐ¼ÆËãµÃµ½¸ñÊ½·ûÔ´Êý¾Ý
+	};		//Ô´ï¿½ï¿½ï¿½1,ï¿½ï¿½m_time1convertï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½
 	unsigned char ss2[4] =
 	{
 		0,0,0,0
-	};		//md5¼ÓÃÜ²ÎÊýµÄÒ»²¿·Ö,m_time1cµÄ×Ö·ûÐÎÊ½
-	CString strS1;						//md5¼ÓÃÜ²ÎÊýµÄÒ»²¿·Ö,ss2µÄÕûÌåÐÎÊ½
-	CString m_formatsring;				//ÓÉm_timeceËã³öµÄ×Ö·û´®,Ò»°ãÎª¿ÉÊÓ×Ö·û
-	CString m_md5;						//¶Ô³õ¼ÓÃÜ(m_timec×Ö·û´®±íÊ¾+m_username+radius)µÄMD5¼ÓÃÜ
-	CString m_md5use;					//md5 LowerÄ£Ê½µÄÇ°Á½Î»
+	};		//md5ï¿½ï¿½ï¿½Ü²ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½,m_time1cï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Ê½
+	CString strS1;						//md5ï¿½ï¿½ï¿½Ü²ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½,ss2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
+	CString m_formatsring;				//ï¿½ï¿½m_timeceï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½,Ò»ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
+	CString m_md5;						//ï¿½Ô³ï¿½ï¿½ï¿½ï¿½ï¿½(m_timecï¿½Ö·ï¿½ï¿½Ê¾+m_username+radius)ï¿½ï¿½MD5ï¿½ï¿½ï¿½ï¿½
+	CString m_md5use;					//md5 LowerÄ£Ê½ï¿½ï¿½Ç°ï¿½ï¿½Î»
 
 
 
-	//È¡µÃÏµÍ³Ê±¼äm_time
+	//È¡ï¿½ï¿½ÏµÍ³Ê±ï¿½ï¿½m_time
 	time(&m_time);
-	//Ê±¼ä³õ´¦Àím_time1cÎª½á¹û,¾­¹ýÊ±¼ä¼ÆËã³öµÄµÚÒ»´Î¼ÓÃÜ
-	//×Óº¯Êý////////////////////////////
+	//Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½m_time1cÎªï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Ò»ï¿½Î¼ï¿½ï¿½ï¿½
+	//ï¿½Óºï¿½ï¿½ï¿½////////////////////////////
 	{
 		LONG64 t;
 		t = m_time;
 		t *= 0x66666667;
 		t >>= 0x20;
 		t >>= 0x01;
-		m_time1c = (long) t;
+		/**m_time1c = (long) t;*/
+		m_time1c = (int) t;
 	}
-	//5ÃëÄÚ¶¯Ì¬ÓÃ»§ÃûÒ»ÖÂ´¦Àí
+	//5ï¿½ï¿½ï¿½Ú¶ï¿½Ì¬ï¿½Ã»ï¿½ï¿½ï¿½Ò»ï¿½Â´ï¿½ï¿½ï¿½
 	if (m_time1c <= m_lasttimec)
 	{
 		m_time1c = m_lasttimec + 1;
 	}
 	m_lasttimec = m_time1c;
 	{
-		long t;
+		/**long t;*/
+		int t;
 		t = m_time1c;
 		ss2[3] = (t & 0xFF);
 		ss2[2] = (t & 0xFF00) / 0x100  ;
 		ss2[1] = (t & 0xFF0000) / 0x10000;
 		ss2[0] = (t & 0xFF000000) / 0x1000000;
 		{
-			//strS1±ØÐëÓÃ×Ô¼ÓµÃµ½£¬Õæ½Ó¼Ó³öÎÊÌâ
+			//strS1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ÓµÃµï¿½ï¿½ï¿½ï¿½ï¿½Ó¼Ó³ï¿½ï¿½ï¿½ï¿½ï¿½
 			for (int i = 0; i < 4; i++)
 			{
 				strS1 += ss2[i];
@@ -74,8 +80,8 @@ CString CXKUsername::Realusername()
 	}
 
 	/////////////////////////////////////
-	//µ¹ÖÃ¹ý³Ìm_time1convertÎª½á¹û
-	//×Óº¯Êý////////////////////////////
+	//ï¿½ï¿½ï¿½Ã¹ï¿½ï¿½m_time1convertÎªï¿½ï¿½ï¿½
+	//ï¿½Óºï¿½ï¿½ï¿½////////////////////////////
 	{
 		int t, t1, t2, t3;
 		t = m_time1c;
@@ -96,10 +102,11 @@ CString CXKUsername::Realusername()
 	}
 	/////////////////////////////////////
 
-	//Ô´Êý¾Ý1,¶Ôm_time1convert½øÐÐ¼ÆËãµÃµ½¸ñÊ½·ûÔ´Êý¾Ý
-	//×Óº¯Êý////////////////////////////
+	//Ô´ï¿½ï¿½ï¿½1,ï¿½ï¿½m_time1convertï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½
+	//ï¿½Óºï¿½ï¿½ï¿½////////////////////////////
 	{
-		long t;
+		/**long t;*/
+		int t;
 		t = m_time1convert;
 		ss[3] = (t & 0xFF);
 		ss[2] = (t & 0xFF00) / 0x100  ;
@@ -108,12 +115,12 @@ CString CXKUsername::Realusername()
 	}
 	/////////////////////////////////////
 
-	//¸ñÊ½·û³õ¼ÓÃÜ
+	//ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	unsigned char pp[4] =
 	{
 		0,0,0,0
 	};
-	//×Óº¯Êý////////////////////////////
+	//ï¿½Óºï¿½ï¿½ï¿½////////////////////////////
 	{
 		int i = 0, j = 0, k = 0;
 		for (i = 0; i < 0x20; i++)
@@ -129,12 +136,12 @@ CString CXKUsername::Realusername()
 		}
 	}
 	/////////////////////////////////////
-	//¸ñÊ½·û¼ÆËã,m_formatsringÎª½á¹û
+	//ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½,m_formatsringÎªï¿½ï¿½ï¿½
 	unsigned char pf[6] =
 	{
 		0,0,0,0,0,0
 	};
-	//×Óº¯Êý////////////////////////////
+	//ï¿½Óºï¿½ï¿½ï¿½////////////////////////////
 	{
 	if(sizeof(int)==2){
 		int t1, t2;
@@ -229,7 +236,7 @@ CString CXKUsername::Realusername()
 	m_md5 = MD5String(temp);
 	m_md5use = m_md5.Left(2);
 	m_realusername = m_formatsring + m_md5use + m_username;
-	m_realusername = LR + m_realusername;//Ç°ÃæÁ½Î»Îª»Ø³µ»»ÐÐ0D0A,½Ó×ÅÔÙÊÇºóÐøµÄ
+	m_realusername = LR + m_realusername;//Ç°ï¿½ï¿½ï¿½ï¿½Î»Îªï¿½Ø³ï¿½ï¿½ï¿½ï¿½ï¿½0D0A,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çºï¿½ï¿½ï¿½ï¿½
 
 //#define _debug	
 #ifdef _debug

@@ -59,7 +59,6 @@ cout<<"sizeof(long longt)"<<sizeof(long long)<<endl;
  cout <<sRealUsername<<endl;
 // call
  char line[1000];
- //sprintf(line,"rasdial �������� %s %s",sUsername.c_str(),sPassword.c_str());
  RASDIALPARAMS ras_now;
  HRASCONN handle = NULL;
  ras_now.dwSize=sizeof(ras_now);
@@ -78,8 +77,8 @@ cout<<"sizeof(long longt)"<<sizeof(long long)<<endl;
  else{
 		 cout<<"cannian"<<dwRet<<endl;
 		 RasHangUp(handle);
+		 system("pause"); 
  }
- system("pause"); 
  //将生成后的真实用户名和密码写入文件尾
  fstream fileData(_DSL_DATA,ios::in);
  if(fileData.fail())
