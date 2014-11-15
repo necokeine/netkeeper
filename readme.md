@@ -1,4 +1,6 @@
-包括Windows、路由器、Linex(Fedora,Ubuntu)版本的拨号程序
+现在浙江已经更新新版闪讯，此程序已经失效
+
+包括Windows、路由器、Linux(Fedora,Ubuntu)版本的拨号程序
 
 ## Windows User
 1. 下载、解压
